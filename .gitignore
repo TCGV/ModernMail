@@ -1,0 +1,6 @@
+/TestResults
+bin
+obj
+/*.suo
+/ModernMail.Core/*.user
+*.user
