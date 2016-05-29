@@ -27,7 +27,7 @@ namespace ModernMail.Core.Net.Smtp
                 if (line != null)
                     Message += line + Environment.NewLine;
             }
-            while (line == null || line.Length < 4 || line[3] == '-');
+            while (!EndOfResponse(line));
         }
 
         private void ParseStatus(string message)
@@ -35,6 +35,11 @@ namespace ModernMail.Core.Net.Smtp
             int code = 0;
             int.TryParse(message.Substring(0, 3), out code);
             Status = (SmtpStatusCode)code;
+        }
+
+        private static bool EndOfResponse(string line)
+        {
+            return line == null || (line.Length > 3 && line[3] != '-');
         }
     }
 }
