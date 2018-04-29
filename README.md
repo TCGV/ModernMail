@@ -46,7 +46,7 @@ This sample code depends on a JSON serializer (`JsonConvert.SerializeObject`) to
 - Don't forget to add [SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework) and [PTR](https://en.wikipedia.org/wiki/Reverse_DNS_lookup) records for your domain otherwise SMTP servers won't trust e-mails you send
 - [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail) authentication not supported yet
 
-##Licensing
+## Licensing
 
 This code is released under the MIT License:
 
