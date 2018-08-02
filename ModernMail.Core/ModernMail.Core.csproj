@@ -39,6 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crypto\PEM.cs" />
+    <Compile Include="Crypto\RSA.cs" />
+    <Compile Include="Crypto\SHA256.cs" />
+    <Compile Include="Dkim\DkimCanonicalizationAlgorithm.cs" />
+    <Compile Include="Dkim\DkimCanonicalizer.cs" />
+    <Compile Include="Dkim\DkimSigner.cs" />
+    <Compile Include="Model\MailWriter.cs" />
+    <Compile Include="Parameters\DkimConfig.cs" />
+    <Compile Include="Parameters\MsaConfig.cs" />
+    <Compile Include="Model\HeaderName.cs" />
+    <Compile Include="Model\MailHeader.cs" />
+    <Compile Include="Dkim\DkimSigningAlgorithm.cs" />
+    <Compile Include="Extensions\TextExtensions.cs" />
     <Compile Include="Dns\AAAARecord.cs" />
     <Compile Include="Dns\ANameRecord.cs" />
     <Compile Include="Dns\DnsQuestion.cs" />
@@ -57,15 +70,17 @@
     <Compile Include="Dns\RecordBase.cs" />
     <Compile Include="Dns\ResourceRecord.cs" />
     <Compile Include="Dns\SoaRecord.cs" />
+    <Compile Include="Encoding\Keyword.cs" />
     <Compile Include="Encoding\QuotedPrintable.cs" />
     <Compile Include="IO\TemporaryDirectory.cs" />
-    <Compile Include="Smtp\MailPayload.cs" />
+    <Compile Include="Model\MailPayload.cs" />
     <Compile Include="Smtp\ResourceCache.cs" />
     <Compile Include="Smtp\SmtpChannel.cs" />
     <Compile Include="Smtp\MailSubmissionAgent.cs" />
     <Compile Include="Smtp\SmtpResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

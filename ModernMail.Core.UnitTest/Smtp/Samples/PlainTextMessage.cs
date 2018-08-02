@@ -2,7 +2,7 @@
 
 namespace ModernMail.Core.UnitTest.Smtp.Samples
 {
-    public class PlainTextMessage : MailMessage
+    public class PlainTextMessage : MailMessage, ISignedMessage
     {
         public PlainTextMessage()
         {
@@ -17,6 +17,16 @@ If you believe that truth=beauty, then surely mathematics is the most beautiful 
 
 Best Regards,
 Peter";
+        }
+
+        public string GetBodyHash()
+        {
+            return "Pj7uVt0MLb5CEhDypUVLXCtpXzNtNjbPhZ9gaKenQg8=";
+        }
+
+        public string GetDkimSignature()
+        {
+            return "B3/jV9nFdGoVlEB9kdf2CcTdpTRzjKqbnl3oUxAIe3ZrHgAxGmSyrGz5KIx/d5KUIrEMulyAFvc/dVXNBfj+wICyS6AuLqGsUE2JGob8HLf3FsUotvpPPkEfQtXVIbTCvqBfXI+LRQ+xAXoAlYkjdhE3ZS6nhBkY7XPqQuE9b/E=";
         }
 
         public override string ToString()

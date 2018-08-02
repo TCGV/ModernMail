@@ -2,7 +2,7 @@
 
 namespace ModernMail.Core.UnitTest.Smtp.Samples
 {
-    public class HtmlMessage : MailMessage
+    public class HtmlMessage : MailMessage, ISignedMessage
     {
         public HtmlMessage()
         {
@@ -18,6 +18,16 @@ namespace ModernMail.Core.UnitTest.Smtp.Samples
 <br/>
 <div>Best Regards,</div>
 <span style=""font-style: italic; color:darkorange; margin-bottom:20px"">Jhon Doe</span>";
+        }
+
+        public string GetBodyHash()
+        {
+            return "v7n/2Jyf8IHZpAuuNjXuSBZ1p8gvmrI40idqOBHKGY4=";
+        }
+
+        public string GetDkimSignature()
+        {
+            return "eGTQZksmZcps6bUIYJcumdUOgnFSwjpASDAJIzpvnSgcbiYREvhLPJBJL5wbYueNvtv3RN4xXjp/JaOo8QEn/XEGcY9/njrV3bTNPZUJu03k9QD+iELilfEhwCzY5aUfn/65QNxB6qKnWlwoIfbTHDc2lqmNwRukZr0wmOdA1gI=";
         }
 
         public override string ToString()

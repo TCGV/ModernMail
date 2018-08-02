@@ -2,7 +2,7 @@
 
 namespace ModernMail.Core.UnitTest.Smtp.Samples
 {
-    public class InlineMessage : MailMessage
+    public class InlineMessage : MailMessage, ISignedMessage
     {
         public InlineMessage()
         {
@@ -40,6 +40,16 @@ Regards!");
             img.ContentDisposition.Inline = true;
             img.ContentId = "e26f03c8-907e-44a3-956a-cab1df8245ce";
             Attachments.Add(img);
+        }
+
+        public string GetBodyHash()
+        {
+            return "DLrtxoicfeLTTT+lCmuNwCqz8Btw3RlPI9zolI9wfTY=";
+        }
+
+        public string GetDkimSignature()
+        {
+            return "FpuxraIdkwhCS12dnxHGYbZKz84zLB4bHWEWqfPWYM0AwkNGBfnnWdXuY99FLLeQKjfz43ZVflmnZK5KFhfJffm093akx+3tGW4TII0A8lhcnR42d+UQBMzCLk9Q9otWadIN85QZOuVIZrzbAfR4y+c8ZKt436M+QwaUgHvaabY=";
         }
 
         public override string ToString()

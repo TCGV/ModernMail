@@ -2,7 +2,7 @@
 
 namespace ModernMail.Core.UnitTest.Smtp.Samples
 {
-    public class AttachmentMessage : MailMessage
+    public class AttachmentMessage : MailMessage, ISignedMessage
     {
         public AttachmentMessage()
         {
@@ -22,6 +22,16 @@ namespace ModernMail.Core.UnitTest.Smtp.Samples
             var img = new Attachment(@"./Smtp/Attachments/PayPal.png");
             img.ContentId = "ac899a35-0cb5-4141-ae03-8ac66aac37d9";
             Attachments.Add(img);
+        }
+
+        public string GetBodyHash()
+        {
+            return "2NcHOE6Du22EUadoBHmZeMR8Xe+SANWu/yQhdnk7Nok=";
+        }
+
+        public string GetDkimSignature()
+        {
+            return "gKd+HjOsi4PBsI1HlepPkz2LPb3HRa4szVGor8rmBEYqMK9cukL1NyvNVx/Q6oDGS8IN6QLO7OTFoGC70szZI9uxIvZacZ5PKs/frcDjYI3Q7W1clj3eZ+ZyRsvrpmua8QzwHi6g0r24hiwFT1CC1xwOQTZIMwAkLo4FD2OBbIc=";
         }
 
         public override string ToString()

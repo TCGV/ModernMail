@@ -84,7 +84,7 @@ namespace ModernMail.Core.Encoding
         private void NewLine()
         {
             if (lineNumber++ > 0)
-                sb.Append(CRLF);
+                sb.Append(Keyword.CRLF);
             lineWidth = 0;
             AppendPrefix();
         }
@@ -92,7 +92,7 @@ namespace ModernMail.Core.Encoding
         private void SoftLine()
         {
             AppendSuffix();
-            Append(CRLF);
+            Append(Keyword.CRLF);
             lineNumber++;
             lineWidth = 0;
             AppendPrefix();
@@ -156,8 +156,6 @@ namespace ModernMail.Core.Encoding
             buff[0] = c;
             return System.Text.Encoding.UTF8.GetBytes(buff);
         }
-
-        private static string CRLF = "\r\n";
 
         private char[] buff;
         private int maxWidth;

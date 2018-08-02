@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -50,10 +51,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Crypto\PEMTest.cs" />
     <Compile Include="Encoding\QuotedPrintableTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Smtp\Samples\AttachmentMessage.cs" />
     <Compile Include="Smtp\Samples\HtmlMessage.cs" />
+    <Compile Include="Smtp\Samples\ISignedMessage.cs" />
     <Compile Include="Smtp\Samples\PlainTextMessage.cs" />
     <Compile Include="Smtp\Samples\InlineMessage.cs" />
     <Compile Include="Smtp\SmtpResponseTest.cs" />
@@ -74,7 +77,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\DkimConfig.json">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

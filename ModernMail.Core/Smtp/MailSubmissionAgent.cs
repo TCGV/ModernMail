@@ -1,4 +1,6 @@
-﻿using ModernMail.Core.Net.Dns;
+﻿using ModernMail.Core.Model;
+using ModernMail.Core.Net.Dns;
+using ModernMail.Core.Parameters;
 using ModernMail.Core.Smtp;
 using System;
 using System.Collections.Generic;
@@ -15,9 +17,9 @@ namespace ModernMail.Core.Net.Smtp
             expirations = new Dictionary<string, DateTime>();
         }
 
-        public MailSubmissionAgent(string hostName)
+        public MailSubmissionAgent(MsaConfig config)
         {
-            this.hostName = hostName;
+            this.config = config;
             cache = new ResourceCache();
         }
 
@@ -121,7 +123,7 @@ namespace ModernMail.Core.Net.Smtp
 
         private void Helo()
         {
-            WriteLine("HELO " + hostName);
+            WriteLine("HELO " + config.HostName);
             var r = Read();
             if (r.Status == SmtpStatusCode.ServiceReady)
                 Read(SmtpStatusCode.Ok);
@@ -186,7 +188,7 @@ namespace ModernMail.Core.Net.Smtp
         private void WritePayload(MailMessage message)
         {
             cache.Prepare(message);
-            Write(new MailPayload(message));
+            Write(new MailPayload(this.config.DkimConfig, message));
         }
 
         private void WriteLine(string value)
@@ -196,7 +198,7 @@ namespace ModernMail.Core.Net.Smtp
 
         private void Write(MailPayload payload)
         {
-            payload.CopyTo(channel);
+            channel.Write(payload.Content);
         }
 
         private void Read(params SmtpStatusCode[] expected)
@@ -211,7 +213,7 @@ namespace ModernMail.Core.Net.Smtp
             return channel.Read();
         }
 
-        private string hostName;
+        private MsaConfig config;
         private SmtpChannel channel;
         private ResourceCache cache;
 
