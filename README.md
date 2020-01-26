@@ -40,8 +40,6 @@ class Program
 }
 ```
 
-This sample code depends on a JSON serializer (`JsonConvert.SerializeObject`) to easily print results to the console.
-
 ## Remarks
 
 For increased deliverability publish your signing public key in the [DNS](https://en.wikipedia.org/wiki/Domain_Name_System) and use the built-in [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail) signing algorithm. Also don't forget to add [SPF](https://en.wikipedia.org/wiki/Sender_Policy_Framework) and [PTR](https://en.wikipedia.org/wiki/Reverse_DNS_lookup) records authorizing sending hosts and IP addresses for your domain.
