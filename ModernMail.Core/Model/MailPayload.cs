@@ -25,7 +25,7 @@ namespace ModernMail.Core.Model
 
         private void WriteContent()
         {
-            if (this.config != null)
+            if (config != null)
                 WriteSignedContent();
             else
                 WriteUnsignedContent();
@@ -35,7 +35,7 @@ namespace ModernMail.Core.Model
         {
             var content = new MailPayload(GetMessage());
 
-            var dkim = new DkimSigner(this.config);
+            var dkim = new DkimSigner(config);
             var header = dkim.CreateHeader(content.Headers, content.Body, signatureDate);
 
             WriteHeader(header);
@@ -130,16 +130,7 @@ namespace ModernMail.Core.Model
             WriteHeader(HeaderName.ContentTransferEncoding, "base64");
             WriteLine();
 
-            var s = attachment.ContentStream;
-            var read = 0;
-            byte[] buff = new byte[4617];
-            while ((read = s.Read(buff, 0, buff.Length)) > 0)
-            {
-                var str = Convert.ToBase64String(buff, 0, read);
-                for (int i = 0; i < str.Length; i += 76)
-                    WriteLine(str.Substring(i, Math.Min(str.Length - i, 76)));
-            }
-
+            WriteBase64(attachment.ContentStream);
             WriteLine();
         }
 
@@ -160,7 +151,7 @@ namespace ModernMail.Core.Model
 
         private string GetContentDisposition(Attachment attachment)
         {
-            var value = "";
+            string value;
             if (attachment.ContentDisposition.Inline)
                 value = "inline; ";
             else

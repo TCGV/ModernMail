@@ -9,15 +9,15 @@ using System.Net.Mail;
 
 namespace ModernMail.Core.Net.Smtp
 {
-    public class MailSubmissionAgent : IDisposable
+    public class MailBroker : IDisposable
     {
-        static MailSubmissionAgent()
+        static MailBroker()
         {
             records = new Dictionary<string, MXRecord>();
             expirations = new Dictionary<string, DateTime>();
         }
 
-        public MailSubmissionAgent(MsaConfig config)
+        public MailBroker(BrokerConfig config)
         {
             this.config = config;
             cache = new ResourceCache();
@@ -58,7 +58,7 @@ namespace ModernMail.Core.Net.Smtp
                 {
                     Begin(mxDomain);
                     Helo();
-                    if (StartSsl())
+                    if (StartTls())
                         Helo();
                     foreach (var addr in group)
                         results.Add(Send(message, addr));
@@ -131,7 +131,7 @@ namespace ModernMail.Core.Net.Smtp
                 throw new SmtpException(r.Status, r.Message);
         }
 
-        private bool StartSsl()
+        private bool StartTls()
         {
             WriteLine("STARTTLS");
             if (Read().Status == SmtpStatusCode.ServiceReady)
@@ -141,13 +141,12 @@ namespace ModernMail.Core.Net.Smtp
 
         private Result Send(MailMessage message, MailAddress addr)
         {
-            SmtpResponse response = null;
-
             WriteLine("MAIL FROM: " + "<" + message.From.Address + ">");
             Read(SmtpStatusCode.Ok);
 
             WriteLine("RCPT TO: " + "<" + addr.Address + ">");
-            response = Read();
+            SmtpResponse response = Read();
+
             if (response.Status == SmtpStatusCode.Ok)
             {
                 WriteLine("DATA ");
@@ -188,7 +187,7 @@ namespace ModernMail.Core.Net.Smtp
         private void WritePayload(MailMessage message)
         {
             cache.Prepare(message);
-            Write(new MailPayload(this.config.DkimConfig, message));
+            Write(new MailPayload(config.DkimConfig, message));
         }
 
         private void WriteLine(string value)
@@ -213,7 +212,7 @@ namespace ModernMail.Core.Net.Smtp
             return channel.Read();
         }
 
-        private MsaConfig config;
+        private BrokerConfig config;
         private SmtpChannel channel;
         private ResourceCache cache;
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernMail.Core", "ModernMail.Core\ModernMail.Core.csproj", "{920EF91E-1013-49B3-9FCB-FF6F7E862719}"
 EndProject
@@ -23,15 +23,14 @@ Global
 		{41FFFCC5-218C-4890-94F2-5826E3C5C784}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41FFFCC5-218C-4890-94F2-5826E3C5C784}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41FFFCC5-218C-4890-94F2-5826E3C5C784}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E4EFED6-23C4-4DB0-ACC6-CB59C3EF365C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E4EFED6-23C4-4DB0-ACC6-CB59C3EF365C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E4EFED6-23C4-4DB0-ACC6-CB59C3EF365C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E4EFED6-23C4-4DB0-ACC6-CB59C3EF365C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{41FFFCC5-218C-4890-94F2-5826E3C5C784} = {31569C54-11AB-4618-927F-C236B86B25F0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4B65FF5-937C-4952-92EC-4C216424333C}
 	EndGlobalSection
 EndGlobal

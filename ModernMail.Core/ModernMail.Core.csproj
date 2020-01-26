@@ -47,7 +47,7 @@
     <Compile Include="Dkim\DkimSigner.cs" />
     <Compile Include="Model\MailWriter.cs" />
     <Compile Include="Parameters\DkimConfig.cs" />
-    <Compile Include="Parameters\MsaConfig.cs" />
+    <Compile Include="Parameters\BrokerConfig.cs" />
     <Compile Include="Model\HeaderName.cs" />
     <Compile Include="Model\MailHeader.cs" />
     <Compile Include="Dkim\DkimSigningAlgorithm.cs" />
@@ -76,7 +76,7 @@
     <Compile Include="Model\MailPayload.cs" />
     <Compile Include="Smtp\ResourceCache.cs" />
     <Compile Include="Smtp\SmtpChannel.cs" />
-    <Compile Include="Smtp\MailSubmissionAgent.cs" />
+    <Compile Include="Smtp\MailBroker.cs" />
     <Compile Include="Smtp\SmtpResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,22 +7,22 @@ namespace ModernMail.Core.Model
     {
         public MailHeader(string key, string value)
         {
-            this.Key = key;
-            this.Value = EncodePrintable(key) ? QuotedPrintable.Inline(value) : value;
+            Key = key;
+            Value = EncodePrintable(key) ? QuotedPrintable.Inline(value) : value;
         }
 
         public MailHeader(string key, MailAddress value)
         {
-            this.Key = key;
-            this.Value = GetAddressString(value);
+            Key = key;
+            Value = GetAddressString(value);
         }
 
         public MailHeader(string key, MailAddressCollection value)
         {
-            this.Key = key;
-            this.Value = "";
+            Key = key;
+            Value = "";
             for (int i = 0; i < value.Count; i++)
-                this.Value += ((i > 0 ? ", " : "") + GetAddressString(value[i]));
+                Value += ((i > 0 ? ", " : "") + GetAddressString(value[i]));
         }
 
         public string Key { get; private set; }
@@ -36,7 +36,7 @@ namespace ModernMail.Core.Model
 
         internal void Append(string value)
         {
-            this.Value += value;
+            Value += value;
         }
 
         private bool EncodePrintable(string key)

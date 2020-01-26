@@ -1,7 +1,7 @@
 ﻿
 namespace ModernMail.Core.Parameters
 {
-    public class MsaConfig
+    public class BrokerConfig
     {
         public string HostName { get; set; }
 

@@ -31,9 +31,9 @@ namespace ModernMail.Core.Net.Dns
         public bool Equals(MXRecord that)
         {
             return that != null &&
-                this.DomainName == that.DomainName &&
-                this.Preference == that.Preference &&
-                this.Ttl == that.Ttl;
+                DomainName == that.DomainName &&
+                Preference == that.Preference &&
+                Ttl == that.Ttl;
         }
 
         public override int GetHashCode()

@@ -22,9 +22,9 @@ namespace ModernMail.Core.Dkim
         public DkimSigner(DkimConfig config)
             : this()
         {
-            this.Domain = config.Domain;
-            this.Selector = config.Selector;
-            this.privateKey = config.PrivateKey;
+            Domain = config.Domain;
+            Selector = config.Selector;
+            privateKey = config.PrivateKey;
         }
 
         public string Domain { get; private set; }
@@ -64,9 +64,9 @@ namespace ModernMail.Core.Dkim
             // Canonicalization
             value.Append(start);
             value.Append("c=");
-            value.Append(this.HeaderCanonicalization.ToString().ToLower());
+            value.Append(HeaderCanonicalization.ToString().ToLower());
             value.Append('/');
-            value.Append(this.BodyCanonicalization.ToString().ToLower());
+            value.Append(BodyCanonicalization.ToString().ToLower());
             value.Append(end);
 
             // signing domain
@@ -125,19 +125,19 @@ namespace ModernMail.Core.Dkim
             var canonicalizer = new DkimCanonicalizer();
             var ch = canonicalizer.CanonicalizeHeaders(
                 headers.Union(new[] { dkimHeader }).ToArray(),
-                this.HeaderCanonicalization);
+                HeaderCanonicalization);
 
-            if (this.SigningAlgorithm != DkimSigningAlgorithm.RSASha256)
+            if (SigningAlgorithm != DkimSigningAlgorithm.RSASha256)
                 throw new NotImplementedException();
 
-            var data = this.Encoding.GetBytes(ch.TrimEnd());
+            var data = Encoding.GetBytes(ch.TrimEnd());
 
-            return Convert.ToBase64String(RSA.Sign(data, this.privateKey));
+            return Convert.ToBase64String(RSA.Sign(data, privateKey));
         }
 
         private string GetAlgorithmName()
         {
-            switch (this.SigningAlgorithm)
+            switch (SigningAlgorithm)
             {
                 case DkimSigningAlgorithm.RSASha1:
                     return "rsa-sha1";
@@ -151,11 +151,11 @@ namespace ModernMail.Core.Dkim
         private string SignBody(string body)
         {
             var canonicalizer = new DkimCanonicalizer();
-            var cb = canonicalizer.CanonicalizeBody(body, this.BodyCanonicalization);
+            var cb = canonicalizer.CanonicalizeBody(body, BodyCanonicalization);
 
-            var bytes = this.Encoding.GetBytes(cb);
+            var bytes = Encoding.GetBytes(cb);
 
-            if (this.SigningAlgorithm != DkimSigningAlgorithm.RSASha256)
+            if (SigningAlgorithm != DkimSigningAlgorithm.RSASha256)
                 throw new InvalidOperationException();
 
             return Convert.ToBase64String(SHA256.Hash(bytes));

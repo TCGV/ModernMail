@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
 
@@ -11,7 +12,7 @@ namespace ModernMail.Core.Model
             this.message = message;
             main_boundary = "_d7b560ac_268d_4523_97dc_1d75182138a1__d7b560ac_268d_4523_97dc_1d75182138a1_";
             sub_boundary = "_97bcbcd8_6f1e_4c2e_b185_bf8690de2aea__97bcbcd8_6f1e_4c2e_b185_bf8690de2aea_";
-            
+
             afterBoundary = false;
             headers = new List<MailHeader>();
             body = new StringWriter();
@@ -20,7 +21,7 @@ namespace ModernMail.Core.Model
 
         public IReadOnlyCollection<MailHeader> Headers
         {
-            get { return this.headers; }
+            get { return headers; }
         }
 
         public string Body
@@ -65,19 +66,6 @@ namespace ModernMail.Core.Model
             WriteLine("--" + sub_boundary + "--");
         }
 
-        protected void WriteLine()
-        {
-            content.WriteLine();
-            if (afterBoundary)
-                body.WriteLine();
-        }
-
-        protected void WriteLine(string value)
-        {
-            content.WriteLine(value);
-            body.WriteLine(value);
-        }
-
         protected void WriteHeader(string key, string value)
         {
             WriteHeader(new MailHeader(key, value));
@@ -90,6 +78,31 @@ namespace ModernMail.Core.Model
                 body.WriteLine(h.Key + ": " + h.Value);
             else
                 headers.Add(h);
+        }
+
+        protected void WriteBase64(Stream stream)
+        {
+            byte[] buff = new byte[4617];
+            int read;
+            while ((read = stream.Read(buff, 0, buff.Length)) > 0)
+            {
+                var str = Convert.ToBase64String(buff, 0, read);
+                for (int i = 0; i < str.Length; i += 76)
+                    WriteLine(str.Substring(i, Math.Min(str.Length - i, 76)));
+            }
+        }
+
+        protected void WriteLine()
+        {
+            content.WriteLine();
+            if (afterBoundary)
+                body.WriteLine();
+        }
+
+        protected void WriteLine(string value)
+        {
+            content.WriteLine(value);
+            body.WriteLine(value);
         }
 
         protected void Write(MailWriter segment)
