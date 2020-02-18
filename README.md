@@ -1,5 +1,5 @@
 # ModernMail
-Mail submission component capable of interacting with SMTP mail servers over the internet for delivering e-mail messages
+Mail submission component capable of interacting with SMTP mail servers over the internet for delivering e-mail messages:
 
 ```c#
 class Program
@@ -39,6 +39,9 @@ class Program
     }
 }
 ```
+
+For more information and implementation details take a look at my blog post:
+* [Mail submission under the hood](https://thomasvilhena.com/2020/01/mail-submission-under-the-hood)
 
 ## Remarks
 
